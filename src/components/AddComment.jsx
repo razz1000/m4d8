@@ -25,7 +25,7 @@ const AddComment = ({asin}) => {
                 body: JSON.stringify(comment),
                 headers: {
                     'Content-type': 'application/json',
-                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU2YmNiZmE5MDIzOTAwMTVkOTY1YzYiLCJpYXQiOjE2NDk4NTE1ODMsImV4cCI6MTY1MTA2MTE4M30.1jc7LN9eMX4yZ7HWl4wazVJ2SyiKUzAHtFm0IglDnhY'
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjU2YmNiZmE5MDIzOTAwMTVkOTY1YzYiLCJpYXQiOjE2NTEwNzI3ODIsImV4cCI6MTY1MjI4MjM4Mn0.Ql3bAleA__3A6DJCFV3Tmx_n4ozJAwLfIuh-Yw78edM'
                 }
             })
             if (response.ok) {
@@ -50,8 +50,7 @@ const AddComment = ({asin}) => {
                             type="text"
                             placeholder="Add comment here"
                             value={comment.comment}
-                           
-                            onChange={e => ({ 
+                            onChange={e => setComment({
                             ...comment,
                             comment: e.target.value,
                         })}
@@ -61,7 +60,7 @@ const AddComment = ({asin}) => {
                         <Form.Label>Rating</Form.Label>
                         <Form.Control as="select" value={comment.rate}
                             
-                            onChange={e => ({
+                            onChange={e => setComment({
                                 ...comment,
                                 rate: e.target.value
                             })}

@@ -3,7 +3,7 @@ import SingleBook from './SingleBook'
 import { Col, Container, Form, Row } from 'react-bootstrap'
 import CommentArea from './CommentArea'
 
-const BookList = (props) => {
+const BookList = ({books}) => {
 
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedBook, setSelectedBook] = useState(null)
@@ -21,9 +21,8 @@ const BookList = (props) => {
                                         placeholder="Search here"
                                         value={searchQuery}
 
-                                        onChange={e => ({
-                                            searchQuery: e.target.value
-                                        })}
+                                        onChange={e => setSearchQuery(e.target.value)
+                                        }
                                     
                                     />
                                 </Form.Group>
@@ -31,15 +30,13 @@ const BookList = (props) => {
                         </Row>
                         <Row>
                             {
-                                props.books.filter(b => b.title.toLowerCase().includes(searchQuery)).map(b => (
+                                books.filter(b => b.title.toLowerCase().includes(searchQuery)).map(b => (
                                     <Col xs={3} key={b.asin} >
                                         <SingleBook
                                             book={b}
                                             selectedBook={selectedBook}
                                             
-                                            changeSelectedBook={asin => ({
-                                                selectedBook: asin
-                                            })}
+                                            changeSelectedBook={asin =>setSelectedBook(asin)}
                                             
                                             />
                                     </Col>
@@ -48,7 +45,7 @@ const BookList = (props) => {
                         </Row>
                     </Col>
                     <Col md={4}>
-                        <CommentArea asin={selectedBook} />
+                      {selectedBook && <CommentArea asin={selectedBook} />}
                     </Col>
                 </Row>
             </Container>
